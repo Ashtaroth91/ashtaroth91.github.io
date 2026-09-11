@@ -14,34 +14,56 @@ import { profile } from '../data/profile.js';
       <!-- Left: Purposeful Narrative -->
       <div class="about-narrative glass-card">
         <p class="narrative-p">
-          I got into software to understand how complex systems truly operate under the hood — from kernel syscalls and memory management to distributed event streams and low-latency database indexes.
+          I am a Computer Science enthusiast and undergraduate at <strong>National Institute of Technology Delhi (NIT Delhi)</strong>, pursuing my B.Tech in Electronics and Communication Engineering (CGPA 7.93).
         </p>
         <p class="narrative-p">
-          I believe in writing code that is <strong>simple, structured, and purposeful</strong>. Development is about building systems that degrade gracefully, scale predictably, and solve real, high-impact problems.
+          I believe in writing software that is <strong>simple, structured, and purposeful</strong>. Whether implementing the <strong>SuperMemo SM-2 spaced repetition algorithm</strong> in CodeRecall or designing rate-limited microservices backed by <strong>PostgreSQL and Upstash Redis</strong>, I focus on building systems that solve real problems with measurable speed.
         </p>
         <p class="narrative-p">
-          My primary engineering focus lies in <strong>distributed backend systems, telemetry pipelines, and scalable AI infrastructure</strong>. I bridge low-level systems efficiency with modern cloud engineering to deliver software that teams can trust.
+          Passionate about <strong>Data Structures & Algorithms (700+ problems solved)</strong>, operating systems, and scalable full-stack web architectures. Always aiming for clean code, robust test coverage, and automated CI/CD deployments.
         </p>
 
         <div class="narrative-badges">
-          <span class="badge">Distributed Systems</span>
-          <span class="badge">Backend Engineering</span>
-          <span class="badge">AI Infrastructure</span>
-          <span class="badge">Performance Optimization</span>
+          <span class="badge">NIT Delhi B.Tech</span>
+          <span class="badge">Next.js & TypeScript</span>
+          <span class="badge">PostgreSQL & Prisma</span>
+          <span class="badge">Docker & CI/CD</span>
+          <span class="badge">700+ DSA Solved</span>
         </div>
       </div>
 
-      <!-- Right: Live Dynamic Stats Grid -->
-      <div class="about-stats-grid">
-        {profile.stats.map((stat, idx) => (
-          <div class="stat-card glass-card">
-            <div class="stat-num-wrap">
-              <span class="stat-num" data-target={stat.value}>{stat.value}</span>
+      <!-- Right: Live Dynamic Stats & Achievements Grid -->
+      <div class="about-right-col">
+        <div class="about-stats-grid">
+          {profile.stats.map((stat) => (
+            <div class="stat-card glass-card">
+              <div class="stat-num-wrap">
+                <span class="stat-num">{stat.value}</span>
+              </div>
+              <div class="stat-label">{stat.label}</div>
+              <div class="stat-sub">{stat.sub}</div>
             </div>
-            <div class="stat-label">{stat.label}</div>
-            <div class="stat-sub">{stat.sub}</div>
+          ))}
+        </div>
+
+        <!-- Achievements Showcase -->
+        <div class="achievements-card glass-card">
+          <div class="achievements-header">
+            <span class="badge" style="color: var(--status-emerald); border-color: rgba(16, 185, 129, 0.3);">Milestones</span>
+            <span class="achievements-title">Key Recognitions</span>
           </div>
-        ))}
+          <div class="achievements-list">
+            {profile.achievements.map((item) => (
+              <div class="achievement-item">
+                <div class="achievement-dot"></div>
+                <div>
+                  <strong class="achievement-heading">{item.title}</strong>
+                  <p class="achievement-detail">{item.detail}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -144,9 +166,64 @@ import { profile } from '../data/profile.js';
     margin-bottom: 0.25rem;
   }
 
-  .stat-sub {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
+  .about-right-col {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .achievements-card {
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border-top: 2px solid var(--status-emerald);
+  }
+
+  .achievements-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .achievements-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .achievements-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .achievement-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .achievement-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--status-emerald);
+    margin-top: 8px;
+    flex-shrink: 0;
+  }
+
+  .achievement-heading {
+    font-size: 0.88rem;
+    color: var(--text-primary);
+    display: block;
+  }
+
+  .achievement-detail {
+    font-size: 0.8rem;
     color: var(--text-muted);
+    line-height: 1.5;
   }
 </style>

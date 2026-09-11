@@ -1,17 +1,23 @@
 // Centralized Profile & Portfolio Data
-// All content can easily be edited or updated based on your resume!
+// Extracted accurately from Dipanshu's Resume & LaTeX details!
 
 export const profile = {
   name: "Dipanshu Sahoo",
-  handle: "dipanshu",
+  handle: "Ashtaroth91",
   roleTitle: "Software Engineer",
+  institution: "National Institute of Technology Delhi",
+  degree: "B.Tech in Electronics and Communication Engineering",
+  gradYear: "2027",
+  cgpa: "7.93",
+  location: "New Delhi, India",
   tagline: "Turning logic into scalable, real-world systems.",
-  bioShort: "I build high-throughput backend services, distributed architectures, and AI pipelines with an obsession for performance, simplicity, and purpose.",
-  status: "Available for SWE Roles · 2026",
+  bioShort: "B.Tech at NIT Delhi building high-throughput backend architectures, developer tooling, and distributed systems with Next.js, Node.js, PostgreSQL, and Redis.",
+  status: "Available for SWE Roles & Internships",
   email: "dipanshu.sahoo.18@gmail.com",
-  github: "https://github.com",
-  linkedin: "https://linkedin.com",
-  resumeUrl: "#", // Can be linked to /resume.pdf or Google Drive
+  github: "https://github.com/Ashtaroth91",
+  linkedin: "https://linkedin.com/in/Dipanshu",
+  leetcode: "https://leetcode.com",
+  resumeUrl: "#",
 
   navLinks: [
     { label: "About", href: "#about" },
@@ -22,10 +28,33 @@ export const profile = {
   ],
 
   stats: [
-    { value: "9.0+", label: "Academic CGPA", sub: "Computer Science" },
-    { value: "20+", label: "Projects & Repos", sub: "Production & Open Source" },
-    { value: "99.9%", label: "Target Reliability", sub: "Resilient Systems" },
-    { value: "100%", label: "Purpose-Driven", sub: "Clean & Tested Code" }
+    { value: "700+", label: "DSA Problems Solved", sub: "LeetCode, Codeforces, GFG, CodeChef" },
+    { value: "Round 2", label: "Amazon HackOn S5", sub: "Top national coding hackathon" },
+    { value: "99%ile", label: "JEE Maths Percentile", sub: "Strong analytical foundations" },
+    { value: "NIT Delhi", label: "B.Tech '27", sub: "Electronics & Communication" }
+  ],
+
+  achievements: [
+    {
+      title: "Amazon HackOn - Season 5",
+      detail: "Qualified into Round 2 of Amazon's flagship national engineering hackathon.",
+      tag: "Competition"
+    },
+    {
+      title: "700+ Competitive Programming Problems",
+      detail: "Consistent problem solver across LeetCode, Codeforces, GeeksforGeeks, and CodeChef.",
+      tag: "DSA"
+    },
+    {
+      title: "Top 1% in JEE Mathematics",
+      detail: "Scored ahead of 99% of candidates nationwide in the Joint Entrance Examination (JEE).",
+      tag: "Academics"
+    },
+    {
+      title: "Inter-NIT Football & Sports Leadership",
+      detail: "Represented NIT Delhi in All India Inter-NIT Football Competition; Executive in Sports Club leading national tournaments.",
+      tag: "Leadership"
+    }
   ],
 
   skillCategories: [
@@ -34,75 +63,74 @@ export const profile = {
       skills: [
         { name: "C", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/c/c-original.svg" },
         { name: "C++", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cplusplus/cplusplus-original.svg" },
-        { name: "Go", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/go/go-original.svg" },
-        { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" },
-        { name: "TypeScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" },
         { name: "JavaScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" },
-        { name: "Java", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" },
-        { name: "Bash", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bash/bash-original.svg" }
+        { name: "TypeScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" },
+        { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" },
+        { name: "SQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/azuresqldatabase/azuresqldatabase-original.svg" },
+        { name: "HTML/CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" }
       ]
     },
     {
-      category: "Backend & Distributed Systems",
+      category: "Frameworks & Backend Technologies",
       skills: [
+        { name: "Next.js 14", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" },
+        { name: "React.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" },
         { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" },
-        { name: "FastAPI", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/fastapi/fastapi-original.svg" },
-        { name: "Spring Boot", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/spring/spring-original.svg" },
-        { name: "Express", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original.svg" },
-        { name: "Kafka", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/apachekafka/apachekafka-original.svg" },
-        { name: "Redis", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redis/redis-original.svg" },
-        { name: "Docker", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" }
+        { name: "Express.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original.svg" },
+        { name: "Tailwind CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" },
+        { name: "Prisma ORM", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/prisma/prisma-original.svg" }
       ]
     },
     {
-      category: "Databases & Cloud Infrastructure",
+      category: "Databases, Cloud & Developer Tools",
       skills: [
         { name: "PostgreSQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" },
         { name: "MongoDB", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg" },
-        { name: "SQLite", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/sqlite/sqlite-original.svg" },
-        { name: "Linux", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg" },
+        { name: "Redis", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redis/redis-original.svg" },
+        { name: "Docker", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" },
+        { name: "Kubernetes", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kubernetes/kubernetes-original.svg" },
+        { name: "AWS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" },
         { name: "Git", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" },
-        { name: "Nginx", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nginx/nginx-original.svg" },
-        { name: "AWS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" }
+        { name: "Postman", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postman/postman-original.svg" }
       ]
     }
   ],
 
   projects: [
     {
-      id: "pulse-api",
-      title: "PulseAPI",
-      category: "backend",
-      categoryLabel: "Backend & Systems",
-      tagline: "High-Throughput API Telemetry & Rate-Limiting Engine",
-      description: "A distributed telemetry and traffic-control proxy designed for low-latency microservices. Implements sliding-window counter algorithms backed by Redis clusters to mitigate cascading server failures.",
-      highlight: "Handled 45,000+ RPS with <0.8ms P99 latency overhead.",
-      technologies: ["Go", "Redis Cluster", "Docker", "Prometheus", "gRPC"],
-      githubUrl: "https://github.com",
-      liveUrl: "#"
-    },
-    {
       id: "code-recall",
       title: "CodeRecall",
-      category: "ai",
-      categoryLabel: "AI & Developer Tooling",
-      tagline: "Semantic Code Search & AST Vector Retrieval Engine",
-      description: "An intelligent codebase search engine using AST (Abstract Syntax Tree) chunking and vector embeddings to enable natural-language semantic discovery across large multi-language code repositories.",
-      highlight: "92% Top-3 semantic retrieval precision across 100k+ LoC.",
-      technologies: ["Python", "FastAPI", "Tree-sitter", "Qdrant", "TypeScript"],
-      githubUrl: "https://github.com",
+      category: "fullstack",
+      categoryLabel: "Full-Stack & EdTech System",
+      tagline: "Spaced-Repetition Platform for DSA & LeetCode Retention",
+      description: "Architected a full-stack platform implementing the SuperMemo SM-2 algorithm to boost long-term DSA retention by ~40%. Integrated Monaco Editor with multi-language execution, instant question extraction, and Recharts dashboards tracking decay curves and practice streaks.",
+      highlight: "Enforced sliding-window limits (10 req/s) with <50ms API responses via Upstash Redis.",
+      technologies: ["Next.js 14", "TypeScript", "PostgreSQL", "Prisma", "Upstash Redis", "Monaco Editor", "Tailwind CSS"],
+      githubUrl: "https://github.com/skksrijan/CodeRecall",
+      liveUrl: "https://code-recall-nu.vercel.app"
+    },
+    {
+      id: "task-flow",
+      title: "TaskFlow",
+      category: "backend",
+      categoryLabel: "Backend & Systems",
+      tagline: "Enterprise Project Management Backend with RBAC & CI/CD",
+      description: "Designed and implemented a secure collaboration backend supporting Projects, Tasks, and Subtasks with hierarchical Role-Based Access Control (Admin, Project Admin, Member). Engineered aggregation pipelines, JWT refresh tokens, cookie-based sessions, and Swagger docs.",
+      highlight: "Production-ready Dockerized deployment with GitHub Actions CI pipeline and automated testing.",
+      technologies: ["Node.js", "Express.js", "MongoDB", "Mongoose", "JWT", "Docker", "GitHub Actions", "Swagger"],
+      githubUrl: "https://github.com/Ashtaroth91",
       liveUrl: "#"
     },
     {
-      id: "nexus-core",
-      title: "NexusCore",
-      category: "backend",
-      categoryLabel: "Distributed Systems",
-      tagline: "Distributed Pub/Sub Broker with Persistent Write-Ahead Logs",
-      description: "A fault-tolerant message streaming engine built with segmented append-only logs, consumer group offset commits, and quorum replication for resilient asynchronous event distribution.",
-      highlight: "Sustained 120MB/s disk throughput with zero message corruption.",
-      technologies: ["C++", "POSIX", "ZeroMQ", "Protobuf", "Linux"],
-      githubUrl: "https://github.com",
+      id: "pulse-api",
+      title: "PulseAPI",
+      category: "fullstack",
+      categoryLabel: "Developer Tools & Testing Client",
+      tagline: "Developer-Focused API Client & Automated Test Assertion Engine",
+      description: "Built a Postman-grade API client supporting request collections, workspaces, environment variables, Bearer/API Key auth, and multi-language code generators. Implemented test assertions validating status codes, response times, headers, and JSON responses.",
+      highlight: "Scalable persistent storage and authentication built with Next.js, PostgreSQL, Prisma, and Better Auth.",
+      technologies: ["Next.js", "JavaScript", "PostgreSQL", "Prisma", "Better Auth", "Tailwind CSS"],
+      githubUrl: "https://github.com/Ashtaroth91",
       liveUrl: "#"
     }
   ]

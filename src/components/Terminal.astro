@@ -77,56 +77,67 @@ import { profile } from '../data/profile.js';
       help: () => `
 <div class="term-response">
   <div class="term-row"><span class="term-cmd">help</span> - Display list of available commands</div>
-  <div class="term-row"><span class="term-cmd">about</span> - Background, core engineering philosophy, and focus</div>
-  <div class="term-row"><span class="term-cmd">skills</span> - Breakdown of languages, backend frameworks & cloud tools</div>
-  <div class="term-row"><span class="term-cmd">projects</span> - Summary of flagship production systems & architectures</div>
-  <div class="term-row"><span class="term-cmd">contact</span> - Email, GitHub, and professional channels</div>
-  <div class="term-row"><span class="term-cmd">resume</span> - Brief credentials & academic background</div>
-  <div class="term-row"><span class="term-cmd">tesseract</span> - Mathematics behind the 4D wireframe hero animation</div>
-  <div class="term-row"><span class="term-cmd">date</span> - Current timestamp</div>
+  <div class="term-row"><span class="term-cmd">about</span> - Background, education at NIT Delhi, and focus</div>
+  <div class="term-row"><span class="term-cmd">skills</span> - Languages, frameworks, databases, and DevOps tools</div>
+  <div class="term-row"><span class="term-cmd">projects</span> - Inspect CodeRecall, TaskFlow, and PulseAPI</div>
+  <div class="term-row"><span class="term-cmd">achievements</span> - HackOn S5, 700+ DSA problems, and rankings</div>
+  <div class="term-row"><span class="term-cmd">contact</span> - Direct email, GitHub, and professional links</div>
+  <div class="term-row"><span class="term-cmd">resume</span> - Academic history and credentials summary</div>
+  <div class="term-row"><span class="term-cmd">tesseract</span> - Mathematics of the 4D wireframe hero animation</div>
   <div class="term-row"><span class="term-cmd">clear</span> - Clear current terminal screen</div>
-  <div class="term-row"><span class="term-cmd">sudo</span> - Run with elevated privileges</div>
 </div>`,
 
       about: () => `
 <div class="term-response">
-  <p><strong>Dipanshu Sahoo</strong> - Software Engineer specializing in backend systems, distributed architectures, and AI pipelines.</p>
-  <p style="margin-top: 6px; color: #94a3b8;">Focus: High-throughput API proxies, distributed pub/sub brokers, and semantic code search. Dedicated to writing purposeful, structured, and resilient code.</p>
+  <p><strong>Dipanshu Sahoo</strong> - B.Tech in Electronics and Communication Engineering at <strong>National Institute of Technology Delhi (NIT Delhi)</strong> [2023 - 2027].</p>
+  <p style="margin-top: 6px; color: #94a3b8;">Software Engineer specializing in scalable full-stack web applications, rate-limited backend architectures, and developer tooling with Next.js, Express, PostgreSQL, and Redis.</p>
 </div>`,
 
       skills: () => `
 <div class="term-response">
-  <div class="term-row"><span class="term-header">Languages:</span> C, C++, Go, Python, TypeScript, Java, Bash, SQL</div>
-  <div class="term-row"><span class="term-header">Backend:</span> Node.js, Express, FastAPI, Spring Boot, Kafka, Redis, Docker</div>
-  <div class="term-row"><span class="term-header">Databases & Cloud:</span> PostgreSQL, MongoDB, SQLite, AWS, Linux, Git, Nginx</div>
+  <div class="term-row"><span class="term-header">Languages:</span> C, C++, JavaScript, TypeScript, Python, HTML/CSS, SQL</div>
+  <div class="term-row"><span class="term-header">Frameworks:</span> Next.js 14, React.js, Node.js, Express.js, Tailwind CSS, Prisma ORM</div>
+  <div class="term-row"><span class="term-header">Databases & Tools:</span> PostgreSQL, MongoDB, Redis, Docker, Kubernetes, AWS, Git, Postman</div>
+  <div class="term-row"><span class="term-header">Core Subjects:</span> DSA, OOP, OS, DBMS, Computer Networks</div>
 </div>`,
 
       projects: () => `
 <div class="term-response">
   <div class="term-row">
-    <strong style="color: #38bdf8;">1. PulseAPI</strong> - Distributed API telemetry & rate-limiting proxy (<0.8ms P99 latency, 45k+ RPS).
+    <strong style="color: #38bdf8;">1. CodeRecall</strong> (Next.js 14, TypeScript, PostgreSQL, Prisma, Upstash Redis, Monaco Editor)<br />
+    <span style="color: #94a3b8;">Spaced-repetition platform for LeetCode revision using SuperMemo SM-2 algorithm. 10 req/s rate limits & &lt;50ms response times.</span><br />
+    <a href="https://code-recall-nu.vercel.app" target="_blank" style="color: #38bdf8; text-decoration: underline;">Live Demo: code-recall-nu.vercel.app</a>
   </div>
-  <div class="term-row" style="margin-top: 6px;">
-    <strong style="color: #38bdf8;">2. CodeRecall</strong> - Semantic code search engine with AST chunking & dense vector retrieval.
+  <div class="term-row" style="margin-top: 8px;">
+    <strong style="color: #38bdf8;">2. TaskFlow</strong> (Node.js, Express.js, MongoDB, JWT, Docker, Swagger)<br />
+    <span style="color: #94a3b8;">Project management backend with hierarchical RBAC, JWT refresh tokens, cookie sessions, and GitHub Actions CI.</span>
   </div>
-  <div class="term-row" style="margin-top: 6px;">
-    <strong style="color: #38bdf8;">3. NexusCore</strong> - Distributed pub/sub broker with persistent append-only logs (120MB/s throughput).
+  <div class="term-row" style="margin-top: 8px;">
+    <strong style="color: #38bdf8;">3. PulseAPI</strong> (Next.js, JavaScript, PostgreSQL, Prisma, Better Auth)<br />
+    <span style="color: #94a3b8;">Developer API testing client with request collections, workspaces, cURL import/export, and automated test assertions.</span>
   </div>
+</div>`,
+
+      achievements: () => `
+<div class="term-response">
+  <div class="term-row">🏆 <strong>Amazon HackOn (Season 5):</strong> Advanced to Round 2.</div>
+  <div class="term-row">⚡ <strong>Competitive Programming:</strong> 700+ problems solved across LeetCode, Codeforces, GFG, CodeChef.</div>
+  <div class="term-row">📊 <strong>JEE Mathematics:</strong> 99th percentile (ahead of 99% students nationwide).</div>
+  <div class="term-row">⚽ <strong>Inter-NIT Sports:</strong> Represented NIT Delhi in All India Inter-NIT Football Competition.</div>
 </div>`,
 
       contact: () => `
 <div class="term-response">
   <div class="term-row">Email: <a href="mailto:dipanshu.sahoo.18@gmail.com" style="color: #38bdf8; text-decoration: underline;">dipanshu.sahoo.18@gmail.com</a></div>
-  <div class="term-row">GitHub: <a href="https://github.com" target="_blank" style="color: #38bdf8; text-decoration: underline;">github.com</a></div>
-  <div class="term-row">LinkedIn: <a href="https://linkedin.com" target="_blank" style="color: #38bdf8; text-decoration: underline;">linkedin.com</a></div>
+  <div class="term-row">GitHub: <a href="https://github.com/Ashtaroth91" target="_blank" style="color: #38bdf8; text-decoration: underline;">github.com/Ashtaroth91</a></div>
+  <div class="term-row">LinkedIn: <a href="https://linkedin.com/in/Dipanshu" target="_blank" style="color: #38bdf8; text-decoration: underline;">linkedin.com/in/Dipanshu</a></div>
 </div>`,
 
       resume: () => `
 <div class="term-response">
-  <p><strong>Dipanshu Sahoo</strong> | Software Engineer</p>
-  <p style="color: #94a3b8;">CGPA: 9.0+ in Computer Science & Engineering</p>
-  <p style="color: #94a3b8;">Status: Available for full-time SWE roles / internships (2026)</p>
-  <p style="margin-top: 6px;">Download PDF: <a href="#" target="_blank" style="color: #38bdf8; text-decoration: underline;">[View Full Resume]</a></p>
+  <p><strong>Education Summary:</strong></p>
+  <p style="color: #cbd5e1; margin-top: 4px;">• <strong>NIT Delhi</strong> — B.Tech in Electronics & Communication [2023 - Present] (CGPA: 7.93)</p>
+  <p style="color: #cbd5e1; margin-top: 4px;">• <strong>Sahoday Senior Secondary School</strong> — Class 12th (89.6%) | Class 10th (92.4%)</p>
 </div>`,
 
       tesseract: () => `
