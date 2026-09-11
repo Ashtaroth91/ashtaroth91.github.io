@@ -1,0 +1,17 @@
+{
+  "name": "dipanshu-portfolio",
+  "type": "module",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "astro": "^5.2.4"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.1"
+  }
+}
