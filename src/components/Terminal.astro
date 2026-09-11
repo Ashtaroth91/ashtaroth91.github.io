@@ -1,0 +1,372 @@
+---
+import { profile } from '../data/profile.js';
+---
+
+<section class="terminal-section" id="terminal-section">
+  <div class="container">
+    <div class="section-tag">terminal</div>
+    <h2 class="section-title">Interactive Terminal.</h2>
+    <p class="section-subtitle">
+      Prefer a command line? Query my background, tech stack, and systems directly from this shell.
+    </p>
+
+    <!-- Terminal Window Container -->
+    <div class="terminal-window glass-card" id="terminal-window">
+      <!-- Window Header Bar -->
+      <div class="terminal-header">
+        <div class="window-controls">
+          <span class="control-dot dot-red"></span>
+          <span class="control-dot dot-yellow"></span>
+          <span class="control-dot dot-green"></span>
+        </div>
+        <div class="terminal-title">dipanshu@systems-node:~ (zsh)</div>
+        <div class="terminal-status">ONLINE</div>
+      </div>
+
+      <!-- Terminal Body -->
+      <div class="terminal-body" id="terminal-body">
+        <div class="terminal-output" id="terminal-output">
+          <div class="terminal-banner">
+            <div class="banner-title">DIPANSHU.DEV // SYSTEMS SHELL [v2.4.0]</div>
+            <p class="welcome-text">
+              Type <span class="cmd-highlight">'help'</span> to inspect available commands.
+            </p>
+          </div>
+        </div>
+
+        <!-- Terminal Input Prompt -->
+        <form class="terminal-input-row" id="terminal-form" autocomplete="off">
+          <span class="terminal-prompt">dipanshu@portfolio:~$</span>
+          <input 
+            type="text" 
+            id="terminal-input" 
+            class="terminal-input" 
+            aria-label="Terminal command input" 
+            spellcheck="false" 
+            autocapitalize="off" 
+            autocomplete="off" 
+          />
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Client-side terminal engine -->
+<script is:inline>
+  (function initTerminal() {
+    const input = document.getElementById('terminal-input');
+    const form = document.getElementById('terminal-form');
+    const output = document.getElementById('terminal-output');
+    const terminalBody = document.getElementById('terminal-body');
+    const terminalWindow = document.getElementById('terminal-window');
+
+    if (!input || !form || !output) return;
+
+    // Focus input on click anywhere in terminal
+    if (terminalWindow) {
+      terminalWindow.addEventListener('click', () => {
+        input.focus();
+      });
+    }
+
+    const commandHistory = [];
+    let historyIndex = -1;
+
+    const COMMANDS = {
+      help: () => `
+<div class="term-response">
+  <div class="term-row"><span class="term-cmd">help</span> - Display list of available commands</div>
+  <div class="term-row"><span class="term-cmd">about</span> - Background, core engineering philosophy, and focus</div>
+  <div class="term-row"><span class="term-cmd">skills</span> - Breakdown of languages, backend frameworks & cloud tools</div>
+  <div class="term-row"><span class="term-cmd">projects</span> - Summary of flagship production systems & architectures</div>
+  <div class="term-row"><span class="term-cmd">contact</span> - Email, GitHub, and professional channels</div>
+  <div class="term-row"><span class="term-cmd">resume</span> - Brief credentials & academic background</div>
+  <div class="term-row"><span class="term-cmd">tesseract</span> - Mathematics behind the 4D wireframe hero animation</div>
+  <div class="term-row"><span class="term-cmd">date</span> - Current timestamp</div>
+  <div class="term-row"><span class="term-cmd">clear</span> - Clear current terminal screen</div>
+  <div class="term-row"><span class="term-cmd">sudo</span> - Run with elevated privileges</div>
+</div>`,
+
+      about: () => `
+<div class="term-response">
+  <p><strong>Dipanshu Sahoo</strong> - Software Engineer specializing in backend systems, distributed architectures, and AI pipelines.</p>
+  <p style="margin-top: 6px; color: #94a3b8;">Focus: High-throughput API proxies, distributed pub/sub brokers, and semantic code search. Dedicated to writing purposeful, structured, and resilient code.</p>
+</div>`,
+
+      skills: () => `
+<div class="term-response">
+  <div class="term-row"><span class="term-header">Languages:</span> C, C++, Go, Python, TypeScript, Java, Bash, SQL</div>
+  <div class="term-row"><span class="term-header">Backend:</span> Node.js, Express, FastAPI, Spring Boot, Kafka, Redis, Docker</div>
+  <div class="term-row"><span class="term-header">Databases & Cloud:</span> PostgreSQL, MongoDB, SQLite, AWS, Linux, Git, Nginx</div>
+</div>`,
+
+      projects: () => `
+<div class="term-response">
+  <div class="term-row">
+    <strong style="color: #38bdf8;">1. PulseAPI</strong> - Distributed API telemetry & rate-limiting proxy (<0.8ms P99 latency, 45k+ RPS).
+  </div>
+  <div class="term-row" style="margin-top: 6px;">
+    <strong style="color: #38bdf8;">2. CodeRecall</strong> - Semantic code search engine with AST chunking & dense vector retrieval.
+  </div>
+  <div class="term-row" style="margin-top: 6px;">
+    <strong style="color: #38bdf8;">3. NexusCore</strong> - Distributed pub/sub broker with persistent append-only logs (120MB/s throughput).
+  </div>
+</div>`,
+
+      contact: () => `
+<div class="term-response">
+  <div class="term-row">Email: <a href="mailto:dipanshu.sahoo.18@gmail.com" style="color: #38bdf8; text-decoration: underline;">dipanshu.sahoo.18@gmail.com</a></div>
+  <div class="term-row">GitHub: <a href="https://github.com" target="_blank" style="color: #38bdf8; text-decoration: underline;">github.com</a></div>
+  <div class="term-row">LinkedIn: <a href="https://linkedin.com" target="_blank" style="color: #38bdf8; text-decoration: underline;">linkedin.com</a></div>
+</div>`,
+
+      resume: () => `
+<div class="term-response">
+  <p><strong>Dipanshu Sahoo</strong> | Software Engineer</p>
+  <p style="color: #94a3b8;">CGPA: 9.0+ in Computer Science & Engineering</p>
+  <p style="color: #94a3b8;">Status: Available for full-time SWE roles / internships (2026)</p>
+  <p style="margin-top: 6px;">Download PDF: <a href="#" target="_blank" style="color: #38bdf8; text-decoration: underline;">[View Full Resume]</a></p>
+</div>`,
+
+      tesseract: () => `
+<div class="term-response">
+  <p style="color: #38bdf8;"><strong>4D Hypercube (Tesseract) Mathematics:</strong></p>
+  <p style="color: #94a3b8; margin-top: 4px;">A tesseract has 16 vertices (±1, ±1, ±1, ±1) and 32 edges in 4-dimensional Euclidean space ℝ⁴.</p>
+  <p style="color: #94a3b8; margin-top: 4px;">The hero canvas continuously rotates these coordinates across the XW, YW, and ZW planes using 4D rotation matrices, projects them down to ℝ³ via perspective divide [1 / (d - w)], then down to ℝ² screen space with depth-based luminance.</p>
+</div>`,
+
+      date: () => `
+<div class="term-response" style="color: #94a3b8;">
+  ${new Date().toString()}
+</div>`,
+
+      sudo: () => `
+<div class="term-response" style="color: #f87171;">
+  Permission denied: User is not in the sudoers file. This incident will be reported to Dipanshu.
+</div>`
+    };
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const rawInput = input.value.trim();
+      if (!rawInput) return;
+
+      commandHistory.push(rawInput);
+      historyIndex = commandHistory.length;
+
+      // Echo input
+      const historyLine = document.createElement('div');
+      historyLine.className = 'terminal-echo-line';
+      historyLine.innerHTML = `<span class="terminal-prompt">dipanshu@portfolio:~$</span> <span class="echo-text">${escapeHtml(rawInput)}</span>`;
+      output.appendChild(historyLine);
+
+      const [cmd] = rawInput.toLowerCase().split(' ');
+
+      if (cmd === 'clear') {
+        output.innerHTML = '';
+      } else if (COMMANDS[cmd]) {
+        const resDiv = document.createElement('div');
+        resDiv.className = 'command-result';
+        resDiv.innerHTML = COMMANDS[cmd]();
+        output.appendChild(resDiv);
+      } else {
+        const errDiv = document.createElement('div');
+        errDiv.className = 'command-result error-text';
+        errDiv.innerHTML = `command not found: <span style="color: #f87171;">${escapeHtml(rawInput)}</span>. Type <span style="color: #38bdf8;">'help'</span> for a list of commands.`;
+        output.appendChild(errDiv);
+      }
+
+      input.value = '';
+      if (terminalBody) {
+        terminalBody.scrollTop = terminalBody.scrollHeight;
+      }
+    });
+
+    // History navigation with Up and Down arrows
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        if (historyIndex > 0) {
+          historyIndex--;
+          input.value = commandHistory[historyIndex];
+        }
+      } else if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        if (historyIndex < commandHistory.length - 1) {
+          historyIndex++;
+          input.value = commandHistory[historyIndex];
+        } else {
+          historyIndex = commandHistory.length;
+          input.value = '';
+        }
+      } else if (e.key === 'Tab') {
+        e.preventDefault();
+        const current = input.value.trim().toLowerCase();
+        const matches = Object.keys(COMMANDS).filter(k => k.startsWith(current));
+        if (matches.length === 1) {
+          input.value = matches[0];
+        }
+      }
+    });
+
+    function escapeHtml(text) {
+      return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    }
+  })();
+</script>
+
+<style>
+  .terminal-section {
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .terminal-window {
+    margin-top: 3.5rem;
+    background: #090c13;
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.8), var(--shadow-glow);
+  }
+
+  /* Header Bar */
+  .terminal-header {
+    background: #0d121c;
+    border-bottom: 1px solid var(--border-subtle);
+    padding: 0.75rem 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .window-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .control-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+
+  .dot-red { background: #ef4444; }
+  .dot-yellow { background: #f59e0b; }
+  .dot-green { background: #10b981; }
+
+  .terminal-title {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--text-muted);
+  }
+
+  .terminal-status {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--status-emerald);
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    padding: 0.2rem 0.5rem;
+    border-radius: var(--radius-sm);
+  }
+
+  /* Body */
+  .terminal-body {
+    padding: 1.5rem 1.75rem 2rem;
+    min-height: 380px;
+    max-height: 520px;
+    overflow-y: auto;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    cursor: text;
+  }
+
+  .banner-title {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--accent-cyan);
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+  }
+
+  .welcome-text {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+
+  .cmd-highlight {
+    color: var(--accent-cyan);
+    font-weight: 600;
+  }
+
+  /* Input Row */
+  .terminal-input-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+  }
+
+  .terminal-prompt {
+    color: var(--accent-cyan);
+    font-weight: 600;
+    white-space: nowrap;
+    user-select: none;
+  }
+
+  .terminal-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    caret-color: var(--accent-cyan);
+  }
+
+  /* History & Responses */
+  .terminal-echo-line {
+    margin-top: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .echo-text {
+    color: #e2e8f0;
+  }
+
+  .command-result {
+    margin-top: 0.5rem;
+    margin-bottom: 0.85rem;
+    padding-left: 0.5rem;
+    border-left: 2px solid rgba(56, 189, 248, 0.3);
+  }
+
+  :global(.term-row) {
+    margin-bottom: 0.35rem;
+    line-height: 1.6;
+    color: #cbd5e1;
+  }
+
+  :global(.term-cmd) {
+    color: var(--accent-cyan);
+    font-weight: 600;
+    margin-right: 0.5rem;
+  }
+
+  :global(.term-header) {
+    color: #94a3b8;
+    font-weight: 600;
+    margin-right: 0.5rem;
+  }
+
+  .error-text {
+    color: #cbd5e1;
+  }
+</style>
