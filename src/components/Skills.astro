@@ -1,0 +1,104 @@
+---
+import { profile } from '../data/profile.js';
+---
+
+<section class="skills-section" id="skills">
+  <div class="container">
+    <div class="section-tag">stack</div>
+    <h2 class="section-title">Technical Toolkit.</h2>
+    <p class="section-subtitle">
+      Tools I think in — from core algorithms and systems programming to high-availability cloud deployments.
+    </p>
+
+    <div class="skills-categories">
+      {profile.skillCategories.map((group) => (
+        <div class="skill-category-block">
+          <h3 class="category-name">{group.category}</h3>
+          
+          <div class="skills-grid">
+            {group.skills.map((skill) => (
+              <div class="skill-pill glass-card">
+                <img src={skill.icon} alt={`${skill.name} icon`} class="skill-icon" loading="lazy" width="22" height="22" />
+                <span class="skill-name">{skill.name}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .skills-section {
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .skills-categories {
+    margin-top: 3.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .skill-category-block {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .category-name {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .category-name::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border-subtle);
+  }
+
+  .skills-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+  }
+
+  .skill-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.65rem 1.15rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-card);
+    border-radius: var(--radius-sm);
+    cursor: default;
+    transition: all var(--transition-fast);
+  }
+
+  .skill-pill:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--accent-cyan);
+    box-shadow: var(--shadow-glow);
+    transform: translateY(-2px);
+  }
+
+  .skill-icon {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
+  }
+
+  .skill-name {
+    font-family: var(--font-sans);
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+</style>
