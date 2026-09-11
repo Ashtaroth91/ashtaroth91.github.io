@@ -4,7 +4,6 @@ import { profile } from '../data/profile.js';
 
 <section class="projects-section" id="projects">
   <div class="container">
-    <div class="section-tag">projects</div>
     <div class="projects-header-flex">
       <div>
         <h2 class="section-title">Featured Projects.</h2>
@@ -24,41 +23,68 @@ import { profile } from '../data/profile.js';
     <!-- Project Cards Grid -->
     <div class="projects-grid" id="projects-grid">
       {profile.projects.map((project) => (
-        <article class="project-card glass-card" data-category={project.category}>
+        <article class="project-card" data-category={project.category}>
           
-          <div class="card-top">
-            <span class="category-tag">{project.categoryLabel}</span>
+          <!-- Card Header (Decluttered & Clean) -->
+          <div class="card-header">
+            <div class="category-badge">
+              <span class="status-dot"></span>
+              <span class="category-name">{project.categoryLabel}</span>
+            </div>
             
-            <div class="card-links">
-              {project.liveUrl !== "#" && (
-                <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" class="live-demo-pill" aria-label={`View Live Demo for ${project.title}`}>
+            <div class="card-actions">
+              {project.liveUrl && project.liveUrl !== "#" && (
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="live-action-btn"
+                  title={`Open live deployment for ${project.title}`}
+                  aria-label={`Open live deployment for ${project.title}`}
+                >
+                  <span class="live-pulse-dot"></span>
                   <span>Live Demo</span>
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                    <polyline points="15 3 21 3 21 9"></polyline>
-                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                    <polyline points="7 7 17 7 17 17"></polyline>
                   </svg>
                 </a>
               )}
-              <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" class="icon-link" aria-label="GitHub Repository">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+              
+              <a
+                href={project.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="github-action-btn"
+                title={`View ${project.title} source code on GitHub`}
+                aria-label={`View ${project.title} source code on GitHub`}
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
                 </svg>
               </a>
             </div>
           </div>
 
-          <h3 class="project-title">{project.title}</h3>
-          <p class="project-tagline">{project.tagline}</p>
-          <p class="project-description">{project.description}</p>
-
-          <!-- Measurable Impact Metric -->
-          <div class="project-highlight">
-            <span class="highlight-icon">⚡</span>
-            <span class="highlight-text">{project.highlight}</span>
+          <!-- Project Core Content -->
+          <div class="card-body">
+            <h3 class="project-title">{project.title}</h3>
+            <p class="project-tagline">{project.tagline}</p>
+            <p class="project-description">{project.description}</p>
           </div>
 
-          <!-- Technologies -->
+          <!-- System Telemetry / Measurable Impact Metric -->
+          <div class="project-highlight">
+            <div class="highlight-badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+              </svg>
+              <span>KEY IMPACT</span>
+            </div>
+            <p class="highlight-text">{project.highlight}</p>
+          </div>
+
+          <!-- Tech Stack Pills -->
           <div class="project-tech-list">
             {project.technologies.map((tech) => (
               <span class="tech-pill">{tech}</span>
@@ -153,126 +179,208 @@ import { profile } from '../data/profile.js';
   }
 
   .project-card {
-    padding: 2.25rem;
+    padding: 2rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    border-top: 2px solid rgba(56, 189, 248, 0.2);
+    background: linear-gradient(180deg, rgba(17, 24, 39, 0.6) 0%, rgba(10, 15, 29, 0.8) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-top: 1px solid rgba(56, 189, 248, 0.28);
+    border-radius: var(--radius-md);
+    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.4);
+    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.25s ease;
   }
 
-  .card-top {
+  .project-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(56, 189, 248, 0.45);
+    border-top-color: var(--accent-cyan);
+    box-shadow: 0 16px 36px -6px rgba(0, 0, 0, 0.6), 0 0 24px -4px rgba(56, 189, 248, 0.12);
+  }
+
+  /* Card Header: Decluttered & Spacious */
+  .card-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 1.5rem;
-  }
-
-  .category-tag {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    color: var(--accent-cyan);
-    background: var(--accent-cyan-dim);
-    padding: 0.25rem 0.65rem;
-    border-radius: var(--radius-sm);
-    border: 1px solid rgba(56, 189, 248, 0.25);
-  }
-
-  .card-links {
-    display: flex;
-    align-items: center;
     gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   }
 
-  .live-demo-pill {
+  .category-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    background: rgba(255, 255, 255, 0.03);
+    padding: 0.28rem 0.65rem;
+    border-radius: 9999px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    white-space: nowrap;
+  }
+
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent-cyan);
+    box-shadow: 0 0 6px var(--accent-cyan);
+  }
+
+  .card-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .live-action-btn {
     display: inline-flex;
     align-items: center;
     gap: 0.35rem;
     font-family: var(--font-mono);
-    font-size: 0.72rem;
+    font-size: 0.73rem;
     font-weight: 600;
-    color: #040914;
-    background: var(--accent-cyan);
-    padding: 0.25rem 0.65rem;
-    border-radius: var(--radius-sm);
-    transition: all var(--transition-fast);
-  }
-
-  .live-demo-pill:hover {
-    background: #7dd3fc;
-    transform: translateY(-1px);
-    box-shadow: 0 0 12px var(--accent-cyan-glow);
-  }
-
-  .icon-link {
-    color: var(--text-muted);
-    transition: all var(--transition-fast);
-  }
-
-  .icon-link:hover {
     color: var(--accent-cyan);
-    transform: translateY(-2px);
+    background: rgba(56, 189, 248, 0.08);
+    padding: 0.28rem 0.7rem;
+    border-radius: 9999px;
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    text-decoration: none;
+    transition: all var(--transition-fast);
+    white-space: nowrap;
+  }
+
+  .live-action-btn:hover {
+    background: var(--accent-cyan);
+    color: #040914;
+    border-color: var(--accent-cyan);
+    box-shadow: 0 0 14px var(--accent-cyan-glow);
+    transform: translateY(-1px);
+  }
+
+  .live-pulse-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: currentColor;
+    box-shadow: 0 0 5px currentColor;
+  }
+
+  .github-action-btn {
+    width: 32px;
+    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    transition: all var(--transition-fast);
+  }
+
+  .github-action-btn:hover {
+    color: var(--accent-cyan);
+    border-color: rgba(56, 189, 248, 0.35);
+    background: rgba(56, 189, 248, 0.06);
+    transform: translateY(-1px);
+  }
+
+  /* Body Content */
+  .card-body {
+    margin-bottom: 1.25rem;
   }
 
   .project-title {
-    font-size: 1.65rem;
+    font-size: 1.55rem;
     font-weight: 700;
-    margin-bottom: 0.4rem;
+    color: #f8fafc;
     letter-spacing: -0.02em;
+    margin-bottom: 0.35rem;
+    transition: color var(--transition-fast);
+  }
+
+  .project-card:hover .project-title {
+    color: var(--accent-cyan);
   }
 
   .project-tagline {
-    font-size: 0.95rem;
-    color: var(--accent-cyan);
+    font-size: 0.88rem;
+    color: #38bdf8;
     font-weight: 500;
-    margin-bottom: 1rem;
+    line-height: 1.45;
+    margin-bottom: 0.95rem;
   }
 
   .project-description {
-    font-size: 0.95rem;
-    color: var(--text-secondary);
-    line-height: 1.7;
-    margin-bottom: 1.5rem;
-  }
-
-  /* Metric Highlight Pill */
-  .project-highlight {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: rgba(16, 185, 129, 0.08);
-    border: 1px solid rgba(16, 185, 129, 0.2);
-    padding: 0.5rem 0.85rem;
-    border-radius: var(--radius-sm);
-    margin-bottom: 1.75rem;
-  }
-
-  .highlight-icon {
     font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.68;
+  }
+
+  /* System Impact Metric */
+  .project-highlight {
+    background: rgba(16, 185, 129, 0.04);
+    border: 1px solid rgba(16, 185, 129, 0.18);
+    border-radius: var(--radius-sm);
+    padding: 0.75rem 0.95rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .highlight-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #10b981;
   }
 
   .highlight-text {
     font-family: var(--font-mono);
     font-size: 0.8rem;
     color: #34d399;
-    font-weight: 500;
+    line-height: 1.5;
   }
 
   /* Tech Tags */
   .project-tech-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: 0.45rem;
     margin-top: auto;
-    padding-top: 1rem;
-    border-top: 1px solid var(--border-subtle);
+    padding-top: 1.25rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
   }
 
   .tech-pill {
     font-family: var(--font-mono);
-    font-size: 0.75rem;
+    font-size: 0.73rem;
     color: var(--text-muted);
-    background: var(--bg-tertiary);
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
     padding: 0.25rem 0.6rem;
-    border-radius: var(--radius-sm);
+    border-radius: 4px;
+    transition: all var(--transition-fast);
+  }
+
+  .tech-pill:hover {
+    color: var(--text-primary);
+    border-color: rgba(56, 189, 248, 0.3);
+    background: rgba(56, 189, 248, 0.04);
   }
 </style>

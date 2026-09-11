@@ -4,8 +4,6 @@ import { profile } from '../data/profile.js';
 
 <section class="contact-section" id="contact">
   <div class="container">
-    <div class="section-tag">contact</div>
-    
     <div class="contact-grid">
       <!-- Left: Purposeful Invitation -->
       <div class="contact-content">
@@ -25,15 +23,15 @@ import { profile } from '../data/profile.js';
         </div>
       </div>
 
-      <!-- Right: Direct Connect Card -->
-      <div class="contact-card glass-card">
+      <!-- Right: Direct Connect Card (Static Container) -->
+      <div class="contact-card">
         <h3 class="card-title">Direct Channels</h3>
         <p class="card-subtitle">Feel free to reach out directly via email or professional networks.</p>
 
         <div class="channel-list">
           
-          <!-- Email Box -->
-          <div class="channel-item">
+          <!-- Email Box (Clickable Mailto + Copy Button) -->
+          <a href={`mailto:${profile.email}`} class="channel-item channel-link" id="email-box">
             <div class="channel-icon-wrap">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
@@ -42,19 +40,19 @@ import { profile } from '../data/profile.js';
             </div>
             <div class="channel-details">
               <div class="channel-label">Email Address</div>
-              <a href={`mailto:${profile.email}`} class="channel-value">{profile.email}</a>
+              <span class="channel-value">{profile.email}</span>
             </div>
-            <button class="copy-btn" id="copy-email-btn" aria-label="Copy email address">
+            <button class="copy-btn" id="copy-email-btn" aria-label="Copy email address" type="button">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                 <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
               </svg>
               <span class="copy-tooltip" id="copy-tooltip">Copy</span>
             </button>
-          </div>
+          </a>
 
-          <!-- GitHub Box -->
-          <div class="channel-item">
+          <!-- GitHub Box (Clickable Link) -->
+          <a href={profile.github} target="_blank" rel="noopener noreferrer" class="channel-item channel-link">
             <div class="channel-icon-wrap">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
@@ -62,12 +60,18 @@ import { profile } from '../data/profile.js';
             </div>
             <div class="channel-details">
               <div class="channel-label">Source Code</div>
-              <a href={profile.github} target="_blank" rel="noopener noreferrer" class="channel-value">github.com/{profile.handle}</a>
+              <span class="channel-value">github.com/{profile.handle}</span>
             </div>
-          </div>
+            <div class="channel-arrow" aria-hidden="true">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="7" y1="17" x2="17" y2="7"></line>
+                <polyline points="7 7 17 7 17 17"></polyline>
+              </svg>
+            </div>
+          </a>
 
-          <!-- LinkedIn Box -->
-          <div class="channel-item">
+          <!-- LinkedIn Box (Clickable Link) -->
+          <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" class="channel-item channel-link">
             <div class="channel-icon-wrap">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
@@ -77,9 +81,15 @@ import { profile } from '../data/profile.js';
             </div>
             <div class="channel-details">
               <div class="channel-label">Network</div>
-              <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" class="channel-value">linkedin.com/in/{profile.handle}</a>
+              <span class="channel-value">linkedin.com/in/Dipanshu</span>
             </div>
-          </div>
+            <div class="channel-arrow" aria-hidden="true">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="7" y1="17" x2="17" y2="7"></line>
+                <polyline points="7 7 17 7 17 17"></polyline>
+              </svg>
+            </div>
+          </a>
 
         </div>
 
@@ -103,7 +113,9 @@ import { profile } from '../data/profile.js';
     const email = 'dipanshu.sahoo.18@gmail.com';
 
     if (copyBtn && tooltip) {
-      copyBtn.addEventListener('click', () => {
+      copyBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation(); // Prevents mailto from opening when copying
         navigator.clipboard.writeText(email).then(() => {
           tooltip.textContent = 'Copied!';
           tooltip.classList.add('visible');
@@ -168,11 +180,27 @@ import { profile } from '../data/profile.js';
     border-radius: var(--radius-full);
   }
 
-  /* Card */
+  /* Static Outer Container - strictly no hover transforms */
   .contact-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-card);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-card);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     padding: 2.5rem;
     display: flex;
     flex-direction: column;
+    cursor: default;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .contact-card:hover {
+    transform: none !important;
+    box-shadow: var(--shadow-card) !important;
+    border-color: var(--border-card) !important;
+    background: var(--bg-card) !important;
   }
 
   .card-title {
@@ -194,15 +222,27 @@ import { profile } from '../data/profile.js';
     margin-bottom: 2rem;
   }
 
+  /* Dynamic Clickable Channel Items */
   .channel-item {
     display: flex;
     align-items: center;
     gap: 1rem;
-    padding: 1rem;
+    padding: 1.15rem 1.25rem;
     background: var(--bg-tertiary);
     border: 1px solid var(--border-subtle);
     border-radius: var(--radius-sm);
     position: relative;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+  }
+
+  .channel-item:hover {
+    background: rgba(24, 32, 50, 0.95);
+    border-color: var(--accent-cyan);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 22px rgba(56, 189, 248, 0.16);
   }
 
   .channel-icon-wrap {
@@ -215,6 +255,13 @@ import { profile } from '../data/profile.js';
     border: 1px solid var(--border-card);
     border-radius: var(--radius-sm);
     color: var(--accent-cyan);
+    transition: all var(--transition-fast);
+  }
+
+  .channel-item:hover .channel-icon-wrap {
+    background: var(--accent-cyan-dim);
+    border-color: var(--accent-cyan);
+    box-shadow: 0 0 12px var(--accent-cyan-glow);
   }
 
   .channel-details {
@@ -235,8 +282,20 @@ import { profile } from '../data/profile.js';
     transition: color var(--transition-fast);
   }
 
-  .channel-value:hover {
+  .channel-item:hover .channel-value {
     color: var(--accent-cyan);
+  }
+
+  .channel-arrow {
+    color: var(--text-muted);
+    transition: all var(--transition-fast);
+    display: flex;
+    align-items: center;
+  }
+
+  .channel-item:hover .channel-arrow {
+    color: var(--accent-cyan);
+    transform: translate(2px, -2px);
   }
 
   .copy-btn {
@@ -251,6 +310,7 @@ import { profile } from '../data/profile.js';
     justify-content: center;
     position: relative;
     transition: color var(--transition-fast);
+    z-index: 2;
   }
 
   .copy-btn:hover {

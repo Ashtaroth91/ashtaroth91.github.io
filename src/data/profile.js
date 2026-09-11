@@ -15,9 +15,10 @@ export const profile = {
   status: "Available for SWE Roles & Internships",
   email: "dipanshu.sahoo.18@gmail.com",
   github: "https://github.com/Ashtaroth91",
-  linkedin: "https://linkedin.com/in/Dipanshu",
+  linkedin: "https://www.linkedin.com/in/dipanshu-sahoo-7a10a5292/",
+  linkedinDisplay: "linkedin.com/in/Dipanshu",
   leetcode: "https://leetcode.com",
-  resumeUrl: "#",
+  resumeUrl: "https://drive.google.com/file/d/1bC0yFafDjTS8Xu7g5MOJ1LGf9yy1KZBR/view?usp=drivesdk",
 
   navLinks: [
     { label: "About", href: "#about" },
@@ -46,9 +47,9 @@ export const profile = {
       tag: "DSA"
     },
     {
-      title: "Top 1% in JEE Mathematics",
-      detail: "Scored ahead of 99% of candidates nationwide in the Joint Entrance Examination (JEE).",
-      tag: "Academics"
+      title: "Pre-Regional Mathematics Olympiad (PRMO / IOQM)",
+      detail: "Qualified the prestigious national mathematics Olympiad (now IOQM), demonstrating advanced mathematical problem-solving aptitude.",
+      tag: "Olympiad"
     },
     {
       title: "Inter-NIT Football & Sports Leadership",
@@ -101,7 +102,7 @@ export const profile = {
       id: "code-recall",
       title: "CodeRecall",
       category: "fullstack",
-      categoryLabel: "Full-Stack & EdTech System",
+      categoryLabel: "Full-Stack",
       tagline: "Spaced-Repetition Platform for DSA & LeetCode Retention",
       description: "Architected a full-stack platform implementing the SuperMemo SM-2 algorithm to boost long-term DSA retention by ~40%. Integrated Monaco Editor with multi-language execution, instant question extraction, and Recharts dashboards tracking decay curves and practice streaks.",
       highlight: "Enforced sliding-window limits (10 req/s) with <50ms API responses via Upstash Redis.",
@@ -113,19 +114,19 @@ export const profile = {
       id: "task-flow",
       title: "TaskFlow",
       category: "backend",
-      categoryLabel: "Backend & Systems",
+      categoryLabel: "Backend & APIs",
       tagline: "Enterprise Project Management Backend with RBAC & CI/CD",
       description: "Designed and implemented a secure collaboration backend supporting Projects, Tasks, and Subtasks with hierarchical Role-Based Access Control (Admin, Project Admin, Member). Engineered aggregation pipelines, JWT refresh tokens, cookie-based sessions, and Swagger docs.",
       highlight: "Production-ready Dockerized deployment with GitHub Actions CI pipeline and automated testing.",
       technologies: ["Node.js", "Express.js", "MongoDB", "Mongoose", "JWT", "Docker", "GitHub Actions", "Swagger"],
-      githubUrl: "https://github.com/Ashtaroth91",
+      githubUrl: "https://github.com/Ashtaroth91/Taskflow",
       liveUrl: "#"
     },
     {
       id: "pulse-api",
       title: "PulseAPI",
       category: "fullstack",
-      categoryLabel: "Developer Tools & Testing Client",
+      categoryLabel: "Developer Tools",
       tagline: "Developer-Focused API Client & Automated Test Assertion Engine",
       description: "Built a Postman-grade API client supporting request collections, workspaces, environment variables, Bearer/API Key auth, and multi-language code generators. Implemented test assertions validating status codes, response times, headers, and JSON responses.",
       highlight: "Scalable persistent storage and authentication built with Next.js, PostgreSQL, Prisma, and Better Auth.",
