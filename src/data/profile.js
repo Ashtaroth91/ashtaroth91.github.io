@@ -66,5 +66,44 @@ export const profile = {
         { name: "AWS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" }
       ]
     }
+  ],
+
+  projects: [
+    {
+      id: "pulse-api",
+      title: "PulseAPI",
+      category: "backend",
+      categoryLabel: "Backend & Systems",
+      tagline: "High-Throughput API Telemetry & Rate-Limiting Engine",
+      description: "A distributed telemetry and traffic-control proxy designed for low-latency microservices. Implements sliding-window counter algorithms backed by Redis clusters to mitigate cascading server failures.",
+      highlight: "Handled 45,000+ RPS with <0.8ms P99 latency overhead.",
+      technologies: ["Go", "Redis Cluster", "Docker", "Prometheus", "gRPC"],
+      githubUrl: "https://github.com",
+      liveUrl: "#"
+    },
+    {
+      id: "code-recall",
+      title: "CodeRecall",
+      category: "ai",
+      categoryLabel: "AI & Developer Tooling",
+      tagline: "Semantic Code Search & AST Vector Retrieval Engine",
+      description: "An intelligent codebase search engine using AST (Abstract Syntax Tree) chunking and vector embeddings to enable natural-language semantic discovery across large multi-language code repositories.",
+      highlight: "92% Top-3 semantic retrieval precision across 100k+ LoC.",
+      technologies: ["Python", "FastAPI", "Tree-sitter", "Qdrant", "TypeScript"],
+      githubUrl: "https://github.com",
+      liveUrl: "#"
+    },
+    {
+      id: "nexus-core",
+      title: "NexusCore",
+      category: "backend",
+      categoryLabel: "Distributed Systems",
+      tagline: "Distributed Pub/Sub Broker with Persistent Write-Ahead Logs",
+      description: "A fault-tolerant message streaming engine built with segmented append-only logs, consumer group offset commits, and quorum replication for resilient asynchronous event distribution.",
+      highlight: "Sustained 120MB/s disk throughput with zero message corruption.",
+      technologies: ["C++", "POSIX", "ZeroMQ", "Protobuf", "Linux"],
+      githubUrl: "https://github.com",
+      liveUrl: "#"
+    }
   ]
 };
