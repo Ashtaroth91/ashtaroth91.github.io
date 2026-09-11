@@ -1,0 +1,152 @@
+---
+import { profile } from '../data/profile.js';
+---
+
+<section class="about-section" id="about">
+  <div class="container">
+    <div class="section-tag">about</div>
+    <h2 class="section-title">Building with Purpose.</h2>
+    <p class="section-subtitle">
+      Development isn't just about making code run — it's about making it resilient, observable, and clean.
+    </p>
+
+    <div class="about-grid">
+      <!-- Left: Purposeful Narrative -->
+      <div class="about-narrative glass-card">
+        <p class="narrative-p">
+          I got into software to understand how complex systems truly operate under the hood — from kernel syscalls and memory management to distributed event streams and low-latency database indexes.
+        </p>
+        <p class="narrative-p">
+          I believe in writing code that is <strong>simple, structured, and purposeful</strong>. Development is about building systems that degrade gracefully, scale predictably, and solve real, high-impact problems.
+        </p>
+        <p class="narrative-p">
+          My primary engineering focus lies in <strong>distributed backend systems, telemetry pipelines, and scalable AI infrastructure</strong>. I bridge low-level systems efficiency with modern cloud engineering to deliver software that teams can trust.
+        </p>
+
+        <div class="narrative-badges">
+          <span class="badge">Distributed Systems</span>
+          <span class="badge">Backend Engineering</span>
+          <span class="badge">AI Infrastructure</span>
+          <span class="badge">Performance Optimization</span>
+        </div>
+      </div>
+
+      <!-- Right: Live Dynamic Stats Grid -->
+      <div class="about-stats-grid">
+        {profile.stats.map((stat, idx) => (
+          <div class="stat-card glass-card">
+            <div class="stat-num-wrap">
+              <span class="stat-num" data-target={stat.value}>{stat.value}</span>
+            </div>
+            <div class="stat-label">{stat.label}</div>
+            <div class="stat-sub">{stat.sub}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-section {
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.25fr 0.95fr;
+    gap: 2.5rem;
+    margin-top: 3rem;
+  }
+
+  @media (max-width: 960px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Narrative Card */
+  .about-narrative {
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .narrative-p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+  }
+
+  .narrative-p strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  .narrative-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 0.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .badge {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--accent-cyan);
+    background: var(--accent-cyan-dim);
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    padding: 0.35rem 0.75rem;
+    border-radius: var(--radius-sm);
+  }
+
+  /* Stats Grid */
+  .about-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 540px) {
+    .about-stats-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .stat-card {
+    padding: 2rem 1.75rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-left: 3px solid var(--accent-cyan);
+  }
+
+  .stat-num-wrap {
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-num {
+    font-size: 2.75rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    font-family: var(--font-sans);
+  }
+
+  .stat-label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+  }
+
+  .stat-sub {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+</style>
