@@ -1,0 +1,525 @@
+---
+import { profile } from '../data/profile.js';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = `${profile.name} | ${profile.roleTitle}`,
+  description = profile.bioShort,
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta name="author" content={profile.name} />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="website" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
+</head>
+<body>
+  <!-- Custom Dual Cursor -->
+  <div id="cur" aria-hidden="true"></div>
+  <div id="cur-r" aria-hidden="true"></div>
+
+  <!-- NAVBAR -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a href="#" class="nav-logo">
+        {profile.handle}<span class="dot">.</span>dev
+      </a>
+
+      <nav class="nav-menu" aria-label="Main Navigation">
+        <ul class="nav-list">
+          {profile.navLinks.map((link) => (
+            <li><a href={link.href} class="nav-link">{link.label}</a></li>
+          ))}
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href={profile.resumeUrl} target="_blank" rel="noopener noreferrer" class="nav-resume-btn">
+          <span>Resume</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 17L17 7M17 7H7M17 7V17"/>
+          </svg>
+        </a>
+        <a href="#contact" class="nav-cta-btn">Get In Touch</a>
+        
+        <button class="hamburger" id="hamburger-btn" aria-label="Toggle Navigation Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-drawer" id="mobile-drawer">
+    <div class="drawer-backdrop" id="drawer-backdrop"></div>
+    <div class="drawer-content">
+      <ul class="drawer-links">
+        {profile.navLinks.map((link) => (
+          <li><a href={link.href} class="drawer-link">{link.label}</a></li>
+        ))}
+        <li><a href={profile.resumeUrl} target="_blank" class="drawer-link">Resume ↗</a></li>
+      </ul>
+      <a href="#contact" class="btn-primary drawer-cta">Get In Touch</a>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT SLOT -->
+  <main id="main-content">
+    <slot />
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-left">
+        <span class="footer-brand">{profile.name}</span>
+        <span class="footer-copy">© {new Date().getFullYear()} — Built with Purpose using Astro</span>
+      </div>
+
+      <div class="footer-center">
+        <div class="system-status">
+          <span class="pulse-dot"></span>
+          <span class="status-label">SYSTEM ONLINE</span>
+          <span class="status-time" id="live-clock">--:--:-- UTC</span>
+        </div>
+      </div>
+
+      <div class="footer-right">
+        <a href={profile.github} target="_blank" rel="noopener noreferrer" class="footer-link" aria-label="GitHub">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+          </svg>
+        </a>
+        <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" class="footer-link" aria-label="LinkedIn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+            <rect x="2" y="9" width="4" height="12"/>
+            <circle cx="4" cy="4" r="2"/>
+          </svg>
+        </a>
+        <a href={`mailto:${profile.email}`} class="footer-link" aria-label="Email">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- CLIENT SCRIPTS: Custom Cursor, Clock, and Drawer (Vanilla JavaScript) -->
+  <script is:inline>
+    // Custom Cursor tracking
+    const cur = document.getElementById('cur');
+    const curR = document.getElementById('cur-r');
+    
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let ringX = mouseX;
+    let ringY = mouseY;
+
+    window.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      if (cur) {
+        cur.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
+      }
+    });
+
+    function renderCursorRing() {
+      ringX += (mouseX - ringX) * 0.15;
+      ringY += (mouseY - ringY) * 0.15;
+      if (curR) {
+        curR.style.transform = `translate3d(${ringX}px, ${ringY}px, 0)`;
+      }
+      requestAnimationFrame(renderCursorRing);
+    }
+    renderCursorRing();
+
+    // Hover effect on clickable elements
+    const clickables = document.querySelectorAll('a, button, input, textarea, .interactive');
+    clickables.forEach((el) => {
+      el.addEventListener('mouseenter', () => curR && curR.classList.add('cursor-hover'));
+      el.addEventListener('mouseleave', () => curR && curR.classList.remove('cursor-hover'));
+    });
+
+    // Mobile Drawer
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const mobileDrawer = document.getElementById('mobile-drawer');
+    const drawerBackdrop = document.getElementById('drawer-backdrop');
+    const drawerLinks = document.querySelectorAll('.drawer-link, .drawer-cta');
+
+    function toggleDrawer() {
+      const isOpen = mobileDrawer.classList.toggle('open');
+      hamburgerBtn.classList.toggle('active', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    }
+
+    if (hamburgerBtn) hamburgerBtn.addEventListener('click', toggleDrawer);
+    if (drawerBackdrop) drawerBackdrop.addEventListener('click', toggleDrawer);
+    drawerLinks.forEach((link) => link.addEventListener('click', toggleDrawer));
+
+    // Live Clock
+    const clockEl = document.getElementById('live-clock');
+    function updateClock() {
+      if (clockEl) {
+        const now = new Date();
+        clockEl.textContent = now.toTimeString().split(' ')[0] + ' LOCAL';
+      }
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
+  </script>
+
+  <style>
+    /* ================= NAVBAR STYLES ================= */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: var(--nav-height);
+      z-index: 100;
+      background: rgba(8, 9, 13, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-subtle);
+      transition: all var(--transition-fast);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    .nav-logo {
+      font-family: var(--font-mono);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+    }
+
+    .nav-logo .dot {
+      color: var(--accent-cyan);
+    }
+
+    .nav-list {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-link {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: color var(--transition-fast);
+      position: relative;
+    }
+
+    .nav-link:hover {
+      color: var(--text-primary);
+    }
+
+    .nav-link:hover::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--accent-cyan);
+      border-radius: 2px;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .nav-resume-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      padding: 0.45rem 0.85rem;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      transition: all var(--transition-fast);
+    }
+
+    .nav-resume-btn:hover {
+      color: var(--accent-cyan);
+      border-color: var(--accent-cyan);
+      background: var(--accent-cyan-dim);
+    }
+
+    .nav-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      background: var(--accent-cyan);
+      color: #040914;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-sm);
+      transition: all var(--transition-fast);
+    }
+
+    .nav-cta-btn:hover {
+      background: #7dd3fc;
+      transform: translateY(-1px);
+    }
+
+    /* Hamburger Toggle */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 26px;
+      height: 18px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      z-index: 110;
+    }
+
+    .hamburger span {
+      width: 100%;
+      height: 2px;
+      background: var(--text-primary);
+      border-radius: 2px;
+      transition: all var(--transition-fast);
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: translateY(8px) rotate(45deg);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: translateY(-8px) rotate(-45deg);
+    }
+
+    /* Mobile Drawer */
+    .mobile-drawer {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 99;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity var(--transition-normal);
+    }
+
+    .mobile-drawer.open {
+      pointer-events: auto;
+      opacity: 1;
+    }
+
+    .drawer-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(8px);
+    }
+
+    .drawer-content {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 280px;
+      height: 100%;
+      background: var(--bg-secondary);
+      border-left: 1px solid var(--border-subtle);
+      padding: 6rem 2rem 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transform: translateX(100%);
+      transition: transform var(--transition-normal);
+    }
+
+    .mobile-drawer.open .drawer-content {
+      transform: translateX(0);
+    }
+
+    .drawer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .drawer-link {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .drawer-cta {
+      width: 100%;
+    }
+
+    @media (max-width: 860px) {
+      .nav-menu, .nav-actions .nav-resume-btn, .nav-actions .nav-cta-btn {
+        display: none;
+      }
+      .hamburger {
+        display: flex;
+      }
+      .mobile-drawer {
+        display: block;
+      }
+    }
+
+    /* ================= FOOTER STYLES ================= */
+    .site-footer {
+      border-top: 1px solid var(--border-subtle);
+      background: var(--bg-primary);
+      padding: 2.5rem 0;
+      margin-top: 4rem;
+      font-size: 0.875rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-left {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .footer-brand {
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .footer-copy {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+
+    .system-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      padding: 0.35rem 0.85rem;
+      border-radius: var(--radius-full);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+    }
+
+    .status-label {
+      color: var(--status-emerald);
+      font-weight: 500;
+    }
+
+    .status-time {
+      color: var(--text-muted);
+      border-left: 1px solid rgba(255, 255, 255, 0.1);
+      padding-left: 0.6rem;
+    }
+
+    .footer-right {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .footer-link {
+      color: var(--text-muted);
+      transition: all var(--transition-fast);
+      display: flex;
+      align-items: center;
+    }
+
+    .footer-link:hover {
+      color: var(--accent-cyan);
+      transform: translateY(-2px);
+    }
+
+    /* ================= CUSTOM CURSOR STYLES ================= */
+    #cur, #cur-r {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      border-radius: 50%;
+      z-index: 9999;
+      transform: translate3d(-100px, -100px, 0);
+    }
+
+    #cur {
+      width: 6px;
+      height: 6px;
+      background: var(--accent-cyan);
+      margin-top: -3px;
+      margin-left: -3px;
+      box-shadow: 0 0 10px var(--accent-cyan);
+    }
+
+    #cur-r {
+      width: 32px;
+      height: 32px;
+      border: 1px solid rgba(56, 189, 248, 0.45);
+      margin-top: -16px;
+      margin-left: -16px;
+      transition: width 0.2s, height 0.2s, background 0.2s, border-color 0.2s;
+    }
+
+    #cur-r.cursor-hover {
+      width: 48px;
+      height: 48px;
+      margin-top: -24px;
+      margin-left: -24px;
+      background: rgba(56, 189, 248, 0.08);
+      border-color: var(--accent-cyan);
+    }
+
+    @media (pointer: coarse) {
+      #cur, #cur-r {
+        display: none;
+      }
+    }
+  </style>
+</body>
+</html>

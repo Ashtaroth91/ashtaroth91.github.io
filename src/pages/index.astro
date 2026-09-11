@@ -1,15 +1,12 @@
 ---
-// Dipanshu Sahoo Portfolio
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { profile } from '../data/profile.js';
 ---
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dipanshu Sahoo | Software Engineer</title>
-  <link rel="stylesheet" href="/src/styles/global.css">
-</head>
-<body>
-  <h1>Dipanshu Sahoo</h1>
-</body>
-</html>
+
+<BaseLayout title={`${profile.name} | ${profile.roleTitle}`}>
+  <div class="container" style="padding-top: 100px; min-height: 70vh;">
+    <span class="section-tag">init</span>
+    <h1 class="section-title">Base Layout Ready</h1>
+    <p class="section-subtitle">Astro static layout with Space Grotesk typography and custom cursor.</p>
+  </div>
+</BaseLayout>
