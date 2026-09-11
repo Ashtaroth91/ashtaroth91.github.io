@@ -1,12 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
 import { profile } from '../data/profile.js';
 ---
 
 <BaseLayout title={`${profile.name} | ${profile.roleTitle}`}>
-  <div class="container" style="padding-top: 100px; min-height: 70vh;">
-    <span class="section-tag">init</span>
-    <h1 class="section-title">Base Layout Ready</h1>
-    <p class="section-subtitle">Astro static layout with Space Grotesk typography and custom cursor.</p>
-  </div>
+  <Hero />
 </BaseLayout>

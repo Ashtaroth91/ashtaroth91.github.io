@@ -1,0 +1,466 @@
+---
+import { profile } from '../data/profile.js';
+---
+
+<section class="hero-section" id="hero">
+  <div class="container hero-inner">
+    <div class="hero-grid">
+      
+      <!-- LEFT: Hero Copy & Actions -->
+      <div class="hero-content">
+        <div class="status-badge">
+          <span class="pulse-dot"></span>
+          <span>{profile.status}</span>
+        </div>
+
+        <h1 class="hero-headline">
+          Turning logic into <br />
+          <span class="gradient-text">scalable, real-world</span> systems.
+        </h1>
+
+        <div class="hero-typewriter">
+          <span class="typewriter-prefix">specializing in</span>
+          <span class="typewriter-target" id="typewriter-target">backend architectures</span>
+          <span class="typewriter-cursor">|</span>
+        </div>
+
+        <p class="hero-description">
+          {profile.bioShort}
+        </p>
+
+        <div class="hero-actions">
+          <a href="#projects" class="btn-primary">
+            <span>See What I've Built</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+          <a href="#terminal-section" class="btn-ghost">
+            <span>$ Launch Terminal</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- RIGHT: Interactive 4D Tesseract & Rotating Text Ring -->
+      <div class="hero-visual">
+        <div class="tesseract-wrapper">
+          
+          <!-- Circular Rotating SVG Text Ring -->
+          <svg class="rotating-text-ring" viewBox="0 0 300 300" aria-hidden="true">
+            <defs>
+              <path id="textCircle" d="M 150, 150 m -120, 0 a 120,120 0 1,1 240,0 a 120,120 0 1,1 -240,0" />
+            </defs>
+            <text font-family="'DM Mono', monospace" font-size="9.5" fill="#94a3b8" letter-spacing="2.2">
+              <textPath href="#textCircle">
+                TURNING COMPLEX LOGIC INTO PURPOSEFUL CODE · DIPANSHU ·
+              </textPath>
+            </text>
+          </svg>
+
+          <!-- 4D Tesseract Canvas -->
+          <canvas id="tesseract-canvas" width="280" height="280" class="tesseract-canvas" aria-label="Interactive 4D Tesseract Wireframe Animation"></canvas>
+          
+          <!-- Profile Badge Tag -->
+          <div class="hero-profile-tag">
+            <div class="profile-name">{profile.name}</div>
+            <div class="profile-sub">{profile.roleTitle} · Systems</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CLIENT JAVASCRIPT: 4D Tesseract Math Engine & Typewriter -->
+<script is:inline>
+  // ================= 4D TESSERACT PROJECTION ENGINE =================
+  (function initTesseract() {
+    const canvas = document.getElementById('tesseract-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    // High DPI Support
+    const dpr = window.devicePixelRatio || 1;
+    const size = 280;
+    canvas.width = size * dpr;
+    canvas.height = size * dpr;
+    ctx.scale(dpr, dpr);
+
+    // 16 Vertices of a 4D Hypercube (x, y, z, w in [-1, 1])
+    const vertices = [];
+    for (let i = 0; i < 16; i++) {
+      vertices.push([
+        (i & 1) ? 1 : -1,
+        (i & 2) ? 1 : -1,
+        (i & 4) ? 1 : -1,
+        (i & 8) ? 1 : -1
+      ]);
+    }
+
+    // 32 Edges connecting vertices that differ by exactly 1 coordinate
+    const edges = [];
+    for (let i = 0; i < 16; i++) {
+      for (let j = i + 1; j < 16; j++) {
+        let diff = 0;
+        for (let k = 0; k < 4; k++) {
+          if (vertices[i][k] !== vertices[j][k]) diff++;
+        }
+        if (diff === 1) edges.push([i, j]);
+      }
+    }
+
+    // 4D Rotation Angles
+    let angleXY = 0;
+    let angleZW = 0;
+    let angleXW = 0;
+    let angleYW = 0;
+
+    // Interactive mouse tilt
+    let mouseTiltX = 0;
+    let mouseTiltY = 0;
+
+    window.addEventListener('mousemove', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      mouseTiltX = (e.clientX - centerX) * 0.0002;
+      mouseTiltY = (e.clientY - centerY) * 0.0002;
+    });
+
+    function rotate4D(point, aXY, aZW, aXW, aYW) {
+      let [x, y, z, w] = point;
+
+      // Rotate in XW plane
+      let cos = Math.cos(aXW), sin = Math.sin(aXW);
+      let nx = x * cos - w * sin;
+      let nw = x * sin + w * cos;
+      x = nx; w = nw;
+
+      // Rotate in YW plane
+      cos = Math.cos(aYW); sin = Math.sin(aYW);
+      let ny = y * cos - w * sin;
+      nw = y * sin + w * cos;
+      y = ny; w = nw;
+
+      // Rotate in ZW plane
+      cos = Math.cos(aZW); sin = Math.sin(aZW);
+      let nz = z * cos - w * sin;
+      nw = z * sin + w * cos;
+      z = nz; w = nw;
+
+      // Rotate in XY plane
+      cos = Math.cos(aXY); sin = Math.sin(aXY);
+      nx = x * cos - y * sin;
+      ny = x * sin + y * cos;
+      x = nx; y = ny;
+
+      return [x, y, z, w];
+    }
+
+    function project4Dto2D(point4D) {
+      const [x, y, z, w] = point4D;
+      // 4D to 3D perspective projection
+      const distance4D = 2.2;
+      const wFactor = 1 / (distance4D - w);
+      const x3 = x * wFactor;
+      const y3 = y * wFactor;
+      const z3 = z * wFactor;
+
+      // 3D to 2D perspective projection
+      const distance3D = 2.5;
+      const zFactor = 1 / (distance3D - z3);
+      const scale = 200;
+      const x2 = x3 * zFactor * scale + size / 2;
+      const y2 = y3 * zFactor * scale + size / 2;
+
+      return { x: x2, y: y2, depth: wFactor * zFactor };
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, size, size);
+
+      angleXY += 0.012 + mouseTiltX;
+      angleZW += 0.01 + mouseTiltY;
+      angleXW += 0.008;
+      angleYW += 0.006;
+
+      // Project all vertices
+      const projected = vertices.map(v => {
+        const rotated = rotate4D(v, angleXY, angleZW, angleXW, angleYW);
+        return project4Dto2D(rotated);
+      });
+
+      // Draw Edges
+      edges.forEach(([i, j]) => {
+        const p1 = projected[i];
+        const p2 = projected[j];
+        const avgDepth = (p1.depth + p2.depth) / 2;
+
+        ctx.beginPath();
+        ctx.moveTo(p1.x, p1.y);
+        ctx.lineTo(p2.x, p2.y);
+        
+        // Depth-based opacity and glow
+        const alpha = Math.min(Math.max(avgDepth * 1.8, 0.15), 0.85);
+        ctx.strokeStyle = `rgba(56, 189, 248, ${alpha})`;
+        ctx.lineWidth = 1.2 * avgDepth * 2;
+        ctx.stroke();
+      });
+
+      // Draw Vertices
+      projected.forEach(p => {
+        ctx.beginPath();
+        const r = Math.max(2.2 * p.depth * 2, 1.2);
+        ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
+        ctx.fillStyle = '#38bdf8';
+        ctx.shadowColor = '#38bdf8';
+        ctx.shadowBlur = 8;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+      });
+
+      requestAnimationFrame(animate);
+    }
+    animate();
+  })();
+
+  // ================= TYPEWRITER EFFECT =================
+  (function initTypewriter() {
+    const target = document.getElementById('typewriter-target');
+    if (!target) return;
+
+    const phrases = [
+      'backend architectures',
+      'distributed systems',
+      'high-throughput APIs',
+      'AI & ML pipelines'
+    ];
+
+    let phraseIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+
+    function type() {
+      const currentPhrase = phrases[phraseIndex];
+      
+      if (isDeleting) {
+        target.textContent = currentPhrase.substring(0, charIndex - 1);
+        charIndex--;
+      } else {
+        target.textContent = currentPhrase.substring(0, charIndex + 1);
+        charIndex++;
+      }
+
+      let speed = isDeleting ? 40 : 80;
+
+      if (!isDeleting && charIndex === currentPhrase.length) {
+        speed = 2000; // Pause at end of phrase
+        isDeleting = true;
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        phraseIndex = (phraseIndex + 1) % phrases.length;
+        speed = 400; // Pause before new phrase
+      }
+
+      setTimeout(type, speed);
+    }
+    setTimeout(type, 1000);
+  })();
+</script>
+
+<style>
+  .hero-section {
+    min-height: calc(100vh - var(--nav-height));
+    display: flex;
+    align-items: center;
+    padding-top: calc(var(--nav-height) + 3rem);
+    padding-bottom: 5rem;
+    position: relative;
+  }
+
+  .hero-inner {
+    width: 100%;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  @media (max-width: 960px) {
+    .hero-grid {
+      grid-template-columns: 1fr;
+      text-align: center;
+      gap: 3.5rem;
+    }
+  }
+
+  /* Status Badge */
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: rgba(16, 185, 129, 0.08);
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    padding: 0.4rem 0.95rem;
+    border-radius: var(--radius-full);
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--status-emerald);
+    margin-bottom: 1.75rem;
+  }
+
+  /* Headline */
+  .hero-headline {
+    font-size: 3.5rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.12;
+    margin-bottom: 1.25rem;
+  }
+
+  @media (max-width: 768px) {
+    .hero-headline {
+      font-size: 2.6rem;
+    }
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, #38bdf8 0%, #818cf8 60%, #c084fc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Typewriter */
+  .hero-typewriter {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 1.15rem;
+    margin-bottom: 1.5rem;
+    min-height: 2rem;
+  }
+
+  @media (max-width: 960px) {
+    .hero-typewriter {
+      justify-content: center;
+    }
+  }
+
+  .typewriter-prefix {
+    color: var(--text-muted);
+  }
+
+  .typewriter-target {
+    color: var(--accent-cyan);
+    font-weight: 500;
+  }
+
+  .typewriter-cursor {
+    color: var(--accent-cyan);
+    animation: pulseGlow 0.8s infinite;
+  }
+
+  /* Description */
+  .hero-description {
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+    line-height: 1.75;
+    max-width: 580px;
+    margin-bottom: 2.5rem;
+  }
+
+  @media (max-width: 960px) {
+    .hero-description {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  /* Actions */
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  @media (max-width: 960px) {
+    .hero-actions {
+      justify-content: center;
+    }
+  }
+
+  /* ================= TESSERACT & VISUAL WRAPPER ================= */
+  .hero-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .tesseract-wrapper {
+    position: relative;
+    width: 320px;
+    height: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .rotating-text-ring {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    animation: spinSlow 28s linear infinite;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .tesseract-canvas {
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(56, 189, 248, 0.06) 0%, rgba(8, 9, 13, 0) 70%);
+    cursor: grab;
+    z-index: 2;
+    transition: transform 0.2s ease-out;
+  }
+
+  .tesseract-canvas:active {
+    cursor: grabbing;
+  }
+
+  .hero-profile-tag {
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--bg-card);
+    border: 1px solid var(--border-card);
+    backdrop-filter: blur(12px);
+    padding: 0.6rem 1.25rem;
+    border-radius: var(--radius-md);
+    text-align: center;
+    box-shadow: var(--shadow-card);
+    z-index: 3;
+    white-space: nowrap;
+  }
+
+  .profile-name {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .profile-sub {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--accent-cyan);
+    margin-top: 2px;
+  }
+</style>
